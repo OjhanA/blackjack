@@ -145,12 +145,12 @@ def print_table_view(dealer_hand, player_hand):
     
     # Print player's total
     # print(f"Player's Total: {player_value}   Player's Bet: {player_hand.current_bet}   Player's Coins: {player_hand.coins}" )
-    print("-"*60)
+    print("-"*60, flush=True)
     
 def pause():
     for _ in range(4):
         time.sleep(.75)
-        print(".", end="")
+        print(".", end="", flush=True)
     
             
 while True: 
@@ -182,18 +182,19 @@ while True:
             print("You got a blackjack! You win")
             win = 1
         else: 
-            answer = input(f"Would you like to hit, stand or double? (h/s/d): ")
+            answer = input(f"Would you like to hit, stand, or double? (h/s/d): ")
             
             while answer != "h" and answer != "s":
             
-                if answer == "sp":
-                    if not player_hand.check_split():
-                        answer = input("You can not split with this hand. You must have two cards of the same rank. Pick another option: ")
-                    else:
-                        player_hand.split()
-                        answer = "h"
+                # if answer == "sp":
+                #     if not player_hand.check_split():
+                #         answer = input("You can not split with this hand. You must have two cards of the same rank. Pick another option: ")
+                #     else:
+                #         pass
+                #         player_hand.split()
+                #         answer = "h"
     
-                elif answer == "d":
+                if answer == "d":
                     if player_hand.current_bet * 2 > player_hand.coins:
                         answer = input("You don't have enough coins to double. You must pick another option: ")
                     else:
@@ -201,7 +202,7 @@ while True:
                         player_hand.double_bet()
                         answer = "s"
                 else:
-                    answer = input("Please select a valid option (h/s/d/sp): ")
+                    answer = input("Please select a valid option (h/s/d): ")
             
             while answer == "h":
                 player_hand.draw(deck)
@@ -225,7 +226,7 @@ while True:
                 while dealer_hand.get_total_value() < 17:
                     dealer_hand.draw(deck)
                     print_table_view(dealer_hand, player_hand)
-                    print("The Dealer hits", end="")
+                    print("The Dealer hits", end="", flush=True)
                     pause()
                     print()
                     
@@ -243,7 +244,7 @@ while True:
             os.system('cls')
             game = False
         else:
-            answer = input("Would you like to play again? (y/n)")
+            answer = input("Would you like to play again? (y/n): ")
             os.system('cls')
             if answer == "n":
                 game = False
