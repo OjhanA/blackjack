@@ -151,6 +151,12 @@ def pause():
     for _ in range(4):
         time.sleep(.75)
         print(".", end="", flush=True)
+
+def clear():
+    if os.name == "nt":
+        os.system('cls')
+    else:
+        os.system('clear')
     
             
 while True: 
@@ -241,11 +247,11 @@ while True:
         print(f"You now have {player_hand.coins} coins.")
         if player_hand.coins == 0:
             input("\nYou are out of coins! Game over (press enter to restart)")
-            os.system('cls')
+            clear()
             game = False
         else:
             answer = input("Would you like to play again? (y/n): ")
-            os.system('cls')
+            clear()
             if answer == "n":
                 game = False
         
